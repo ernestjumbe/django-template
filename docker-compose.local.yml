@@ -1,0 +1,35 @@
+services:
+  web:
+    env_file: .env/.dev
+    restart: unless-stopped 
+    build:
+      context: .
+      target: builder
+      dockerfile: ./compose/local/django/Dockerfile
+    command: /start
+    depends_on:
+      - db
+    ports: 
+      - '8000:8000'
+    volumes:
+      - .:/app
+  
+  db:
+    image: postgis/postgis:16-master
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: postgress
+      POSTGRES_USER: postgress
+      POSTGRES_PASSWORD: postgress
+    ports:
+      - '8001:5432'
+  
+  email:
+    image: dockage/mailcatcher:0.9.0
+    restart: unless-stopped
+    ports:
+      - 1080:1080
+      - 1025:1025
+volumes:
+  postgres_data:

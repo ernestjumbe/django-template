@@ -1,0 +1,15 @@
+DEBUG=1
+SECRET_KEY='django-insecure-9s@(x)g465r$)yt^1+0b^vf2ksz_u3ez05+a!lk1qe&95+vqk3'
+DJANGO_ALLOWED_HOSTS=*
+
+DJANGO_SUPERUSER_PASSWORD=**********
+DJANGO_SUPERUSER_EMAIL=example@example.com
+DJANGO_SUPERUSER_USERNAME=admin
+
+
+SQL_ENGINE=django.db.backends.postgresql
+SQL_DATABASE={{project_name}}
+SQL_USER={{project_name}}
+SQL_PASSWORD={{project_name}}
+SQL_HOST=db
+SQL_PORT=5432
