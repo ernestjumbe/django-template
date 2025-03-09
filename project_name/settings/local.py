@@ -25,6 +25,12 @@ DATABASES = {
     }
 }
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_URL = "static/"
+
+MEDIA_URL = "/media/"
+
 INTERNAL_IPS = [
     "127.0.0.1",
     "localhost",
