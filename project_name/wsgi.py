@@ -13,7 +13,7 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE",
-    f"{{project_name}}.settings.{{os.environ.get('DJANGO_ENV', 'base')}}",
+    f"{{project_name}}.settings.{os.environ.get('DJANGO_ENV', 'base')}",
 )
 
 application = get_wsgi_application()
