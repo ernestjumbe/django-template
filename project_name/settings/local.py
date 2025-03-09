@@ -16,12 +16,12 @@ MIDDLEWARE += [
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("AFROURBAN_SQL_ENGINE", ""),
-        "NAME": os.environ.get("AFROURBAN_SQL_DATABASE", "afrourban"),
-        "USER": os.environ.get("AFROURBAN_SQL_USER", "afrourban"),
-        "PASSWORD": os.environ.get("AFROURBAN_SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("AFROURBAN_SQL_HOST", "localhost"),
-        "PORT": os.environ.get("AFROURBAN_SQL_PORT", 5432),
+        "ENGINE": SQL_ENGINE,
+        "NAME": SQL_DATABASE,
+        "USER": SQL_USER,
+        "PASSWORD": SQL_PASSWORD,
+        "HOST": SQL_HOST,
+        "PORT": SQL_PORT,
     }
 }
 
