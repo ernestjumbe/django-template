@@ -26,4 +26,4 @@ fi
 $@
 
 >&2 echo 'Starting staging server'
-gunicorn {{project_name}}.wsgi:application
+poetry run python manage.py runserver 0.0.0.0:8000
