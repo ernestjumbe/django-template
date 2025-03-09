@@ -18,6 +18,8 @@ def get_secret(name: str, default: str = "", read_option: str = "r") -> str:
 
 
 def decode_key(encoded_bytes: str) -> str:
+    if os.environ.get("DJANGO_ENV") in ["local", "dev"]:
+        return encoded_bytes
     decoded_bytes = base64.b64decode(encoded_bytes)
     return decoded_bytes.decode("utf-8")
 
