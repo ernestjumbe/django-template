@@ -50,7 +50,7 @@ COPY . /app
 RUN make install
 
 
-COPY ./compose/staging/django/start /start
+COPY ./compose/prd/django/start /start
 RUN sed -i 's/\r$//g' /start \
     && chmod +x /start
 
