@@ -23,7 +23,7 @@ DATABASES = {
         "USER": SQL_USER,
         "PASSWORD": SQL_PASSWORD,
         "HOST": SQL_HOST,
-        "PORT": SQL_PORT,
+        "PORT": int(SQL_PORT),
     }
 }
 

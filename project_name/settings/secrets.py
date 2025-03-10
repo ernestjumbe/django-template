@@ -8,7 +8,7 @@ import base64
 def get_secret(name: str, default: str = "", read_option: str = "r") -> str:
 
     if os.environ.get(name):
-        return os.environ.get(name)
+        return os.environ.get(name, default)
 
     try:
         with open(f"/run/secrets/{name}", read_option) as file:
@@ -35,4 +35,4 @@ SQL_DATABASE = get_secret("SQL_DATABASE", "{{project_name}}")
 SQL_USER = get_secret("SQL_USER", "{{project_name}}")
 SQL_PASSWORD = get_secret("SQL_PASSWORD")
 SQL_HOST = get_secret("SQL_HOST")
-SQL_PORT = get_secret("SQL_PORT", 5432)
+SQL_PORT = get_secret("SQL_PORT", "5432")

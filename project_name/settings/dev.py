@@ -23,7 +23,7 @@ DATABASES = {
         "USER": SQL_USER,
         "PASSWORD": SQL_PASSWORD,
         "HOST": SQL_HOST,
-        "PORT": SQL_PORT,
+        "PORT": int(SQL_PORT),
     }
 }
 
@@ -42,11 +42,11 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 HTML_MINIFY = False
 
-EMAIL_HOST = "email"
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
-EMAIL_PORT = 1025
-EMAIL_USE_TLS = False
+# EMAIL_HOST = "email"
+# EMAIL_HOST_USER = ""
+# EMAIL_HOST_PASSWORD = ""
+# EMAIL_PORT = 1025
+# EMAIL_USE_TLS = False
 
 
 def show_toolbar(request):
