@@ -9,8 +9,8 @@ DJANGO_SUPERUSER_USERNAME=admin
 
 
 SQL_ENGINE=django.db.backends.postgresql
-SQL_DATABASE={{project_name}}
-SQL_USER={{project_name}}
-SQL_PASSWORD={{project_name}}
+SQL_DATABASE=postgress
+SQL_USER=postgress
+SQL_PASSWORD=postgress
 SQL_HOST=db
 SQL_PORT=5432
