@@ -14,16 +14,39 @@ poetry run python manage.py migrate --settings={{project_name}}.settings.dev
 >&2 echo 'Collecting static files'
 poetry run python manage.py collectstatic --ignore ts --ignore debug_toolbar --ignore django_extensions --noinput --settings={{project_name}}.settings.dev
 
+TMPFILE=$(mktemp) || { echo "Failed to create temp file"; exit 1; }
+
+set +e
 if [ "$DJANGO_SUPERUSER_USERNAME" ]
 then
     >&2 echo 'Creating superuser'
     poetry run python manage.py createsuperuser --settings={{project_name}}.settings.dev \
         --noinput \
         --username $DJANGO_SUPERUSER_USERNAME \
-        --email $DJANGO_SUPERUSER_EMAIL
+        --email $DJANGO_SUPERUSER_EMAIL 2> $TMPFILE
+        EXIT_CODE=$?
+        set -e
 fi
 
 $@
 
->&2 echo 'Starting staging server'
+# Check if the command failed
+if [[ $EXIT_CODE -ne 0 ]]; then
+    # Check if the error matches the specific message
+    if grep -q "CommandError: Error: That username is already taken." "$TMPFILE"; then
+        echo "Warning: Username already taken. Continuing script..."
+    else
+        # Display unexpected error and exit
+        echo "Unexpected error:"
+        cat "$TMPFILE"
+        rm "$TMPFILE"
+        exit $EXIT_CODE
+    fi
+fi
+
+# Cleanup and continue
+rm "$TMPFILE"
+echo "Script continues..."
+
+>&2 echo 'Starting test server'
 poetry run python manage.py runserver 0.0.0.0:8000

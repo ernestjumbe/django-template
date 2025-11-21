@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.4
 
 # pull official base image
-FROM --platform=$BUILDPLATFORM python:3.11.4-slim-buster AS builder
+FROM --platform=$BUILDPLATFORM python:3.12-slim AS builder
 
 EXPOSE 8000
 # set work directory
@@ -20,9 +20,11 @@ ENV PYTHONFAULTHANDLER=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
     POETRY_HOME='/usr/local' \
-    POETRY_VERSION=1.8.3 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    POETRY_VERSION=2.2.1
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
     # dependencies for building Python packages
@@ -42,17 +44,20 @@ RUN apt-get update \
     && poetry --version \
     # cleaning up unused files
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -sSL https://install.python-poetry.org | python3 -
+    && rm -rf /var/lib/apt/lists/*
 
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 COPY . /app
-RUN make install
+RUN make install-dev
 
+COPY ./compose/local/django/entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /entrypoint
+RUN chmod +x /entrypoint
 
 COPY ./compose/local/django/start /start
-RUN sed -i 's/\r$//g' /start \
-    && chmod +x /start
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
 
 
 
