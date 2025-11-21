@@ -1,7 +1,5 @@
-.. {% comment %}
-
 ===============
-Dj Layout
+Django Docker Template
 ===============
 
      django-admin startproject --template=https://github.com/ernestjumbe/django-template/zipball/master --extension=py,rst,gitignore,example,toml,Makefile,dev,local,dev,local --name Makefile,start,entryfile,Dockerfile project_name
@@ -9,5 +7,3 @@ Dj Layout
 .. note:: The text following this comment block will become the README.rst of the new project.
 
 -----
-
-.. {% endcomment %}

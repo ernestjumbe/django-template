@@ -1,6 +1,6 @@
 services:
   web:
-    env_file: .env/.dev
+    env_file: env/.local
     restart: unless-stopped 
     build:
       context: .
