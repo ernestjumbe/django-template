@@ -7,7 +7,7 @@ Django Docker Template
 
 ## Packages to add
 
-- psycopg2-binary
+- psycopg2-binary 2.9.9
 
 ## Dev packages to add
 
